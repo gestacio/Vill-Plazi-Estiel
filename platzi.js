@@ -159,8 +159,8 @@ izquier = left[0];
 function mover_cerdo(evento){
 
 //---Contadores para movimientod el pollo---
-for (var i = -30; i < 40; i = i + 10){
-    for (var j = - 20; j < 30; j = j + 10){
+for (var i = -20; i < 30; i = i + 10){
+    for (var j = - 30; j < 40; j = j + 10){
         for (var k = -40; k < 50; k = k + 10){
 
 //-------------------MOVIMIENTO DEL POLLO-------------------
@@ -177,25 +177,25 @@ for (var i = -30; i < 40; i = i + 10){
                 }
             }
 
-            if (x_cerdo == x_pollo + 40 && y_cerdo == y_pollo + j) {
+            if (x_cerdo == x_pollo + 40 && y_cerdo == y_pollo + i) {
                 if (evento.keyCode == teclas.LEFT) {
                     x_pollo = x_pollo - move;
                 }
             }
 
-            if (x_cerdo == x_pollo + 10 && y_cerdo == y_pollo + j) {
+            if (x_cerdo == x_pollo + 10 && y_cerdo == y_pollo + i) {
                 if (evento.keyCode == teclas.LEFT) {
                     x_pollo = x_pollo - 50;
                 }
             }
 
-            if (x_cerdo == x_pollo - 50 && y_cerdo == y_pollo - j) {
+            if (x_cerdo == x_pollo - 50 && y_cerdo == y_pollo - i) {
                 if (evento.keyCode == teclas.RIGHT) {
                     x_pollo = x_pollo + move;
                 }
             }
 
-            if (x_cerdo == x_pollo - 20 && y_cerdo == y_pollo - j) {
+            if (x_cerdo == x_pollo - 20 && y_cerdo == y_pollo - i) {
                 if (evento.keyCode == teclas.RIGHT) {
                     x_pollo = x_pollo + 50;
                 }
@@ -211,18 +211,38 @@ for (var i = -30; i < 40; i = i + 10){
 
 //-----Esquina superior derecha ↑→-----
 for (var l = 400; l < 450; l++){
-    if (y_pollo == 0 && x_pollo == l){
+    if (x_pollo == l && y_pollo == 0){
         x_pollo = x_pollo - 10;
         y_pollo = y_pollo + 100;
     }
 }
 
+//-----Esquina superior izquierda ←↑-----
+for (var m = 10; m < 50; m++){
+    if (x_pollo == 10 && y_pollo == m) {
+        x_pollo = x_pollo + 100;
+        y_pollo = y_pollo - 10;
+    }
+}
 
+//-----Esquina inferior izquierda ←↑-----
+for (var m = 10; m < 50; m++){
+    if (x_pollo == m && y_pollo == 440) {
+        x_pollo = x_pollo + 10;
+        y_pollo = y_pollo - 100;
+    }
+}
 
 // ----Extremo superior ↑---
     if (y_pollo == 0) {
         x_pollo = x_pollo + 60;
         y_pollo = y_pollo + 10;
+    }
+
+// ---Extremo inferior ↓---
+    if (y_pollo == 440) {
+        x_pollo = x_pollo - 60;
+        y_pollo = y_pollo - 10;
     }
 
 // ---Extremo derecho →---
@@ -232,7 +252,10 @@ for (var l = 400; l < 450; l++){
     }
 
 // ---Extremo izquierdo ←---
-
+    if (x_pollo == 0) {
+        x_pollo = x_pollo + 10;
+        y_pollo = y_pollo - 50;
+    }
 
 
 //-------------------MOVIMIENTO DEL CERDO-------------------
@@ -260,25 +283,19 @@ for (var l = 400; l < 450; l++){
 
 
   
+//---------ATRAPA AL POLLO----------
 
-if (x_pollo == 440 && y_pollo == 430) {
-    alert("Has atrapado al pollo");
+function reset(){
     x_pollo = 150;
     y_pollo = 150;
 }
 
-if (x_pollo == 430 && y_pollo == 430) {
-    alert("Has atrapado al pollo");
-    x_pollo = 150;
-    y_pollo = 150;
+for (var a = 410; a < 450; a = a + 10) {
+    if ((x_pollo == a && y_pollo == 430) || (x_pollo == a && y_pollo == 420)) {
+        alert("Has atrapado al pollo");
+        reset();
+    }
 }
-
-if (x_pollo == 420 && y_pollo == 430) {
-    alert("Has atrapado al pollo");
-    x_pollo = 150;
-    y_pollo = 150;
-}
-
 
 
 //    console.log(evento);
